@@ -8,8 +8,8 @@ spec:
     app: timeoff-management-gorilla
   ports:
   - protocol: TCP
-    port: 8082
-    nodePort: 8082
+    port: 3000
+    nodePort: 3000
 
 ---
 
