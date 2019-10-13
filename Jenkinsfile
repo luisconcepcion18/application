@@ -2,14 +2,14 @@ pipeline {
     agent any
     environment {
         //be sure to replace "luisconcepcion18" with your own Docker Hub username 
-        DOCKER_IMAGE_NAME = "luisconcepcion18/train-schedule"
+        DOCKER_IMAGE_NAME = "luisconcepcion18/timeoff-management-gorilla"
     }
     stages {
         stage('Build') {
             steps {
                 echo 'Running build automation'
                 sh './gradlew build --no-daemon'
-                archiveArtifacts artifacts: 'dist/trainSchedule.zip'
+                archiveArtifacts artifacts: 'dist/timeoff-management-gorilla.zip'
             }
         }
         stage('Build Docker Image') {
@@ -18,7 +18,7 @@ pipeline {
             }
             steps {
                 script {
-                    app = docker.build(DOCKER_IMAGE_NAME) //Create and tag image with the name luisconcepcion18/train-schedule using the Dockerfile in the repository
+                    app = docker.build(DOCKER_IMAGE_NAME) //Create and tag image with the name luisconcepcion18/timeoff-management-gorilla using the Dockerfile in the repository
                     app.inside {
                         sh 'echo Hello, World!'
                     }
@@ -48,7 +48,7 @@ pipeline {
                 //implement Kubernetes deployment here
 		kubernetesDeploy(
                     kubeconfigId: 'kubeconfig',
-                    configs: 'train-schedule-kube.yml',
+                    configs: 'timeoff-management-gorilla.yml',
                     enableConfigSubstitution: true
                 )
             }
