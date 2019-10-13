@@ -5,13 +5,7 @@ pipeline {
         DOCKER_IMAGE_NAME = "luisconcepcion18/timeoff-management-gorilla"
     }
     stages {
-        stage('Build') {
-            steps {
-                echo 'Running build automation'
-                sh './gradlew build --no-daemon'
-                archiveArtifacts artifacts: 'dist/timeoff-management-gorilla.zip'
-            }
-        }
+       
         stage('Build Docker Image') {
             when {
                 branch 'master'
